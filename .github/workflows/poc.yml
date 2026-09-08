@@ -4,8 +4,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  successful-job:
+    name: Successful job
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: echo "GitHub Actions workflow ran"
+      - name: Print useful log lines
+        run: |
+          echo "POC log: starting successful job"
+          echo "POC log: preparing test data"
+          echo "POC log: successful job finished"
+      - name: Passing test
+        run: |
+          echo "POC test: passing test started"
+          test "TeamCity" = "TeamCity"
+          echo "POC test: passing test passed"
+
+  failing-job:
+    name: Failing job
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Print failure log lines
+        run: |
+          echo "POC log: failing job started"
+          echo "POC log: this job is intentionally failing"
+          exit 1
+
+  test-job:
+    name: Test job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulated test suite
+        run: |
+          echo "POC test suite: Authentication"
+          echo "POC test: login passed"
+          echo "POC test: logout passed"
+          echo "POC test suite: finished"
