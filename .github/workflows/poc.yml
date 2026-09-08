@@ -22,7 +22,6 @@ jobs:
   failing-job:
     name: Failing job
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Print failure log lines
         run: |
@@ -32,6 +31,7 @@ jobs:
 
   test-job:
     name: Test job
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Simulated test suite
