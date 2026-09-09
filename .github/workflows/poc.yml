@@ -18,6 +18,15 @@ jobs:
           echo "POC test: passing test started"
           test "TeamCity" = "TeamCity"
           echo "POC test: passing test passed"
+      - name: Create artifact
+        run: |
+          mkdir -p output
+          echo "Artifact from GitHub Actions" > output/result.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: poc-artifact
+          path: output/result.txt
 
   failing-job:
     name: Failing job
