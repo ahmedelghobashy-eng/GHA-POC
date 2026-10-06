@@ -43,9 +43,30 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Simulated test suite
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install pytest
+        run: python -m pip install pytest
+      - name: Run tests and write JUnit XML
         run: |
-          echo "POC test suite: Authentication"
-          echo "POC test: login passed"
-          echo "POC test: logout passed"
-          echo "POC test suite: finished"
+          mkdir -p test-results
+          cat > test_poc.py <<'PY'
+          def test_login_configuration_has_a_project_name():
+              project_name = "TeamCity"
+              assert project_name == "TeamCity"
+
+          def test_logout_configuration_is_enabled():
+              logout_enabled = True
+              assert logout_enabled
+          PY
+          python -m pytest -q test_poc.py --junitxml=test-results/junit.xml
+      - name: Upload JUnit test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/*.xml
+          if-no-files-found: warn
+          retention-days: 1
