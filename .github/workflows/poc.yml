@@ -11,6 +11,7 @@ jobs:
       - name: Print useful log lines
         run: |
           echo "POC log: starting successful job"
+          echo "POC revision: ${GITHUB_SHA}"
           echo "POC log: preparing test data"
           echo "POC log: successful job finished"
       - name: Passing test
