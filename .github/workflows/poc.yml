@@ -23,6 +23,7 @@ jobs:
         run: |
           mkdir -p output
           echo "Artifact from GitHub Actions" > output/result.txt
+          echo "Revision: ${GITHUB_SHA}" >> output/result.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
