@@ -73,3 +73,26 @@ jobs:
           path: test-results/*
           if-no-files-found: warn
           retention-days: 1
+
+  dependency-chain-first:
+    name: Dependency chain first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Complete first dependency
+        run: echo "First dependency completed"
+
+  dependency-chain-middle:
+    name: Dependency chain middle (60 second delay)
+    needs: dependency-chain-first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold the chain for one minute
+        run: sleep 60
+
+  dependency-chain-last:
+    name: Dependency chain last
+    needs: dependency-chain-middle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm the dependency completed
+        run: echo "Last job started after the middle dependency completed"
