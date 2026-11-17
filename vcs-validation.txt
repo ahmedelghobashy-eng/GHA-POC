@@ -1,1 +1,1 @@
-VCS validation commit A: verify feature branch and concurrent run revision isolation.
+VCS validation commit B: the earlier run must retain commit A while this run uses commit B.
