@@ -16,4 +16,8 @@ jobs:
           echo "PROBE_GITHUB_REF=$GITHUB_REF"
           echo "PROBE_WORKFLOW_SHA=$WORKFLOW_SHA"
           echo "PROBE_WORKFLOW_REF=$WORKFLOW_REF"
-          echo "PROBE_SOURCE_MARKER=base_initial"
+          echo "PROBE_SOURCE_MARKER=base_advanced"
+  base_only:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "PROBE_JOB=base_only"
