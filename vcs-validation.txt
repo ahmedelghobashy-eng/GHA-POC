@@ -1,0 +1,1 @@
+VCS validation commit B: the earlier run must retain commit A while this run uses commit B.
