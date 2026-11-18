@@ -1,0 +1,19 @@
+name: PR source probe
+on:
+  pull_request:
+    branches:
+      - pr-source-base-20261118
+jobs:
+  identity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record workflow identity
+        env:
+          WORKFLOW_SHA: ${{ github.workflow_sha }}
+          WORKFLOW_REF: ${{ github.workflow_ref }}
+        run: |
+          echo "PROBE_GITHUB_SHA=$GITHUB_SHA"
+          echo "PROBE_GITHUB_REF=$GITHUB_REF"
+          echo "PROBE_WORKFLOW_SHA=$WORKFLOW_SHA"
+          echo "PROBE_WORKFLOW_REF=$WORKFLOW_REF"
+          echo "PROBE_SOURCE_MARKER=base_initial"
